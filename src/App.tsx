@@ -32,24 +32,26 @@ export default function App() {
         {renderPage()}
       </main>
 
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-border z-50">
-        <div className="grid grid-cols-4 py-2">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-border z-50 safe-area-bottom">
+        <div className="grid grid-cols-4 py-2 px-1">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex flex-col items-center gap-1 py-2 px-1 transition-all duration-200 ${
+              className={`flex flex-col items-center gap-1 py-2 px-1 rounded-xl transition-all duration-200 ${
                 activeTab === tab.id
-                  ? "text-[hsl(var(--accent))]"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-foreground"
+                  : "text-muted-foreground"
               }`}
             >
-              <Icon
-                name={tab.icon}
-                size={22}
-                className={`transition-transform duration-200 ${activeTab === tab.id ? "scale-110" : ""}`}
-              />
-              <span className="text-[10px] font-medium leading-none">{tab.label}</span>
+              <div className={`p-1.5 rounded-xl transition-all duration-200 ${activeTab === tab.id ? "bg-[hsl(var(--accent))]" : ""}`}>
+                <Icon
+                  name={tab.icon}
+                  size={20}
+                  className={`transition-transform duration-200 ${activeTab === tab.id ? "scale-110 text-foreground" : ""}`}
+                />
+              </div>
+              <span className={`text-[10px] font-semibold leading-none ${activeTab === tab.id ? "text-foreground" : "text-muted-foreground"}`}>{tab.label}</span>
             </button>
           ))}
         </div>
